@@ -15,11 +15,10 @@ def login_view(request, *args, **kwargs):
 
 def confirmation_view(request, *args, **kwargs):
     user=request.user
-    print("there is requires")
     return render(request,'confirmation.html',{user : 'user'})
 
 def activate(request,uidb64,token):
-    username = urlsafe_base64_decode(uidb64).decode("utf-8") 
+    username = urlsafe_base64_decode(uidb64[2:13]).decode('ascii')
     user = CustomUser.objects.get(username= username)
     token_is_valid=default_token_generator.check_token(user,token)
     if token_is_valid and not user.is_active:

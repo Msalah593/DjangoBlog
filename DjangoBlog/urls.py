@@ -23,5 +23,5 @@ urlpatterns = [
     path('',login_view, name='home'),
     path('users/signup/', SignUp.as_view(),name='signup'),
     path('users/confirmation/', confirmation_view,name='confirmation'),
-    re_path(r'users/validate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',activate,name='user-activation-link')
+    re_path(r'users/validate/(?P<uidb64>[0-9A-Za-z_\-\']+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',activate,name='user-activation-link')
 ]
