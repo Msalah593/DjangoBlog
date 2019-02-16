@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.http import HttpResponse
@@ -19,7 +19,7 @@ def confirmation_view(request, *args, **kwargs):
 
 def activate(request,uidb64,token):
     username = urlsafe_base64_decode(uidb64[2:13]).decode('ascii')
-    user = CustomUser.objects.get(username= username)
+    user = get_object_or_404(CustomUser ,username=username)
     token_is_valid=default_token_generator.check_token(user,token)
     if token_is_valid and not user.is_active:
         user.is_active=True

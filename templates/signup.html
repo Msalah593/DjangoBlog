@@ -1,11 +1,25 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
-{% block head %}Sign Up{% endblock %}
+{% block head %}
+<title>Sign Up</title>
+<style>
+    .center_div{
+        margin: 0 auto;
+        width:60% ;/* value of your choice which suits your alignment */
+        height:30%;
+    }
+</style>
+{% endblock %}
 {% block content %}
-  <h2>Sign up</h2>
+<div class="container center_div">
+  <h2 class="text-center">Sign up</h2>
+  <div class=col-sm-14>
   <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form|crispy }}
     <button type="submit">Sign up</button>
   </form>
+</div>
+</div>
 {% endblock %}
