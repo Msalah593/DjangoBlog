@@ -11,12 +11,18 @@
 </style>
 {% endblock %}
 {% block content %}
-<div class="container center_div">
-<form method="post" class="col-sm-12">
-    <h3> please login </h3>
+<div class="container center_div" >
+<form method="post" class="col-sm-12" >
+    <h3 class="container center_div"> login </h3>
   {% csrf_token %}
   {{ form|crispy }}
-  <button type="submit">Login</button>
+  <button type="submit" class="btn btn-primary btn-xs" id=login>Login</button>
 </form>
 </div>
+
+<script>var elmnt = document.getElementById("login");
+elmnt.scrollIntoView();
+
+</script>
+
 {% endblock %}
