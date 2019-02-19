@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 # Create your views here.
 
 class ArticleList(generic.ListView):
+    ordering=['-pub_date']
     model=Article
     template_name='index.html'
     context_object_name='articles'
