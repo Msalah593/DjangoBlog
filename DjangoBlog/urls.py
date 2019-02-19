@@ -16,13 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include,re_path
 from users.views import login_view,SignUp,confirmation_view,activate
+from articles.views import ArticleList,ArticleCreate
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/',include('django.contrib.auth.urls')),
-    path('',login_view, name='home'),
+    path('',ArticleList.as_view(), name='home'),
+    path('createarticle',ArticleCreate.as_view(),name='createarticle'),
     path('users/signup/', SignUp.as_view(),name='signup'),
     path('users/confirmation/', confirmation_view,name='confirmation'),
-    # path('hometemplate', home_view,name='home'),
     re_path(r'users/validate/(?P<uidb64>[0-9A-Za-z_\-\']+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',activate,name='user-activation-link')
 ]
