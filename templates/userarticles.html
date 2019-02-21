@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block head %}
+<title> MyBlog | {{user.username}} </title>
+{% endblock %}
+
+{% block content %}
+
+<div class="container" id='goto'>
+        <div class="row" >
+          <div class="col-lg-8 col-md-10 mx-auto" >
+          <h4 class="col-lg-1 col-md-12 mx-auto"><a href="{% url 'createarticle' %}">Create Article</a></h4>
+            {% if not articles %}
+            <div class="post-preview">
+                <h2 class="post-title">
+                    No Posts found
+                  </h2>
+            </div>     
+            {% endif %}
+            {% for article in articles %}
+            <div class="post-preview">
+              <a href="{% url 'article-detail' article.id %}">
+                <h2 class="post-title">
+                  {{ article.title}}
+                </h2>
+                <h3 class="post-subtitle">
+                  {{ article.body }}
+                </h3>
+              </a>
+              <a href="{% url 'article-update' article.id %}"><button type="edit" class="btn btn-primary btn-xs" >edit</button></a>
+                <button type="delete" class="btn btn-primary btn-xs" id=login>delete</button>
+              <p class="post-meta">Posted
+                on {{ article.pub_date }}</p>
+            </div>
+            <hr>
+            {% endfor %}
+
+{% endblock %}
