@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include,re_path
 from users.views import login_view,SignUp,confirmation_view,activate
-from articles.views import ArticleList,ArticleCreate,articledetials,UserArticleList,ArticleUpdate,ArticleViewSet,CreateViewSet
+from articles.views import ArticleList,ArticleCreate,articledetials,UserArticleList,ArticleUpdate
+from api.views import ArticleViewSet,CreateViewSet,SignupView
 from rest_framework import routers, serializers, viewsets
 # from django.conf.urls import url, include
 # from users.models import CustomUser
@@ -52,5 +53,6 @@ urlpatterns = [
     # url(r'^api/', include(router.urls)),
     # url(r'api-auth/', include('rest_framework.urls', namespace='rest_framework'))
     path('api/articles', ArticleViewSet.as_view({'get': 'list'})),
-    path('api/articles/create', CreateViewSet.as_view({'post': 'create'}))    
+    path('api/articles/create', CreateViewSet.as_view({'post': 'create'})),
+    path('api/signup',SignupView.as_view({'post':'create'}))
 ]

@@ -6,10 +6,7 @@ from django.urls import reverse_lazy
 from django.utils import six
 from django.db.models import Q
 from .forms import ArticleForm
-from rest_framework import viewsets, permissions,authentication
 
-# from .permissions import IsOwnerOrReadOnly
-from .serializers import ArticleSerializer
 
 # Create your views here.
 
@@ -113,17 +110,3 @@ class UserArticleList(generic.ListView):
         print (context)
         return self.render_to_response(context)
 
-class CreateViewSet(viewsets.ModelViewSet):
-    permission_classes = [permissions.IsAuthenticated]
-    authentication_classes = [authentication.BasicAuthentication]
-
-    # def get_queryset(self):
-    #     qs = self.queryset.filter(author=self.request.user)
-    #     return qs
-    serializer_class = ArticleSerializer
-    def perform_create(self, serializer):
-        serializer.save(author = self.request.user)
-
-class ArticleViewSet(viewsets.ModelViewSet):
-    serializer_class = ArticleSerializer
-    queryset = Article.objects.all()
