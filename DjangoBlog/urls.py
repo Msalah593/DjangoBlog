@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include,re_path
 from users.views import login_view,SignUp,confirmation_view,activate
-from articles.views import ArticleList,ArticleCreate,articledetials,UserArticleList,ArticleUpdate,ArticleViewSet
+from articles.views import ArticleList,ArticleCreate,articledetials,UserArticleList,ArticleUpdate,ArticleViewSet,CreateViewSet
 from rest_framework import routers, serializers, viewsets
 # from django.conf.urls import url, include
 # from users.models import CustomUser
@@ -51,5 +51,6 @@ urlpatterns = [
     # re_path(r'users/validate/(?P<uidb64>[0-9A-Za-z_\-\']+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',activate,name='user-activation-link'),
     # url(r'^api/', include(router.urls)),
     # url(r'api-auth/', include('rest_framework.urls', namespace='rest_framework'))
-    path('api/articles', ArticleViewSet.as_view({'get': 'list'}))    
+    path('api/articles', ArticleViewSet.as_view({'get': 'list'})),
+    path('api/articles/create', CreateViewSet.as_view({'post': 'create'}))    
 ]
