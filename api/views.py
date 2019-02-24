@@ -2,6 +2,8 @@ from django.shortcuts import render
 from .serializers import ArticleSerializer,SignupSerializer
 from rest_framework import viewsets, permissions,authentication
 from articles.models import Article
+from django.contrib.auth.hashers import check_password, make_password
+from users.forms import CustomUserCreationForm
 
 # Create your views here.
 
@@ -20,8 +22,6 @@ class ArticleViewSet(viewsets.ModelViewSet):
     serializer_class = ArticleSerializer
     queryset = Article.objects.all()
 
-class SignupView(viewsets.ModelViewSet):
+class SignupView(viewsets.ModelViewSet,CustomUserCreationForm):
     serializer_class = SignupSerializer
-    def perform_create(self, serializer):
-        if serializer.is_valid():
-            serializer.save()
+    
