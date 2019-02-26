@@ -16,9 +16,6 @@ class CustomUser(AbstractUser):
         help_text=('Designates whether this user should be treated as '
                     'active. Unselect this instead of deleting accounts.'))
 
-    def __str__(self):
-        return self.email
-
 @receiver(signals.post_save,sender=CustomUser)
 def user_created_signal(sender,instance,created,**kwargs):
     if created:

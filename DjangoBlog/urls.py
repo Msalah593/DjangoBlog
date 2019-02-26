@@ -17,31 +17,18 @@ from django.contrib import admin
 from django.urls import path,include,re_path
 from users.views import login_view,SignUp,confirmation_view,activate
 from articles.views import ArticleList,ArticleCreate,articledetials,UserArticleList,ArticleUpdate
-from api.views import ArticleViewSet,CreateViewSet,SignupView
+from api.views import ArticleViewSet,UserViewSet
 from rest_framework import routers, serializers, viewsets
-# from django.conf.urls import url, include
-# from users.models import CustomUser
 
-
-# # Serializers define the API representation.
-# class UserSerializer(serializers.HyperlinkedModelSerializer):
-#     class Meta:
-#         model = CustomUser
-#         fields = ('url', 'username', 'email', 'is_staff')
-
-# # ViewSets define the view behavior.
-# class UserViewSet(viewsets.ModelViewSet):
-#     queryset = CustomUser.objects.all()
-#     serializer_class = UserSerializer
-
-# # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 router.register(r'article', ArticleViewSet)
+router.register(r'users', UserViewSet)
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/',include('django.contrib.auth.urls')),
+    re_path(r'^api/', include(router.urls)),
     path('',ArticleList.as_view(), name='home'),
     path('createarticle',ArticleCreate.as_view(),name='createarticle'),
     path('articles/<id>/', articledetials, name='article-detail'),
@@ -49,10 +36,5 @@ urlpatterns = [
     path('users/signup/', SignUp.as_view(),name='signup'),
     path('users/confirmation/', confirmation_view,name='confirmation'),
     path('users/articles/<user>',UserArticleList.as_view(),name='user-articles'),
-    # re_path(r'users/validate/(?P<uidb64>[0-9A-Za-z_\-\']+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',activate,name='user-activation-link'),
-    # url(r'^api/', include(router.urls)),
-    # url(r'api-auth/', include('rest_framework.urls', namespace='rest_framework'))
-    path('api/articles', ArticleViewSet.as_view({'get': 'list'})),
-    path('api/articles/create', CreateViewSet.as_view({'post': 'create'})),
-    path('api/signup',SignupView.as_view({'post':'create'}))
+    re_path(r'users/validate/(?P<uidb64>[0-9A-Za-z_\-\']+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',activate,name='user-activation-link'),
 ]
