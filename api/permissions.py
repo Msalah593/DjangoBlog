@@ -12,24 +12,25 @@ class Usercreation(BasePermission):
     def has_permission(self, request, view):
         print(request.method)
         if request.method!='GET':
-            if  request.user and request.user.is_superuser:
+            if request.user.is_superuser:
                 return True
             else:
                 return False
-        return True
 
 class Articlecreation(BasePermission):
     def has_object_permission(self, request, view, obj):
-        if obj.author == request.user:
+        if obj.author == request.user or request.user.is_superuser:
+            print('edit')
             return True
         else:
             print('geet hena leeh')
             return False
     def has_permission(self, request, view):
-        if request.user.is_superuser:
+        print("e7na hena f has permission")
+        if request.method=='GET':
             return True
-        if request.method =='GET':
+        elif request.user.is_authenticated:
             return True
-        elif request.user.is_authenticated and request.method =='POST':
-            return True
+        else:
+            return False
         
