@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 {% block head %}
-<h1>Confirmation !</h1>
+<title>Confirmation !</title>
 {% endblock %}
 {% block content %}
+{% if status == 'confirmation sent' %}
 <h2>Please check your email !</h2>
+{% elif status == 'user activated' %}
+<h2>Hi {{user}} , your account is activated please login !</h2>
+{% elif status == 'invalid token' %}
+<h2>Invalid token</h2>
+{% endif %}
 {% endblock content %}

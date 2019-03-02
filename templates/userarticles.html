@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block head %}
-<title> MyBlog | {{user.username}} </title>
+<title> MyBlog | {{ owner }} </title>
 {% endblock %}
 
 {% block content %}
@@ -8,6 +8,7 @@
 <div class="container" id='goto'>
         <div class="row" >
           <div class="col-lg-8 col-md-10 mx-auto" >
+          {% if user.is_authenticated %}
           <h4 class="col-lg-1 col-md-12 mx-auto"><a href="{% url 'createarticle' %}">Create Article</a></h4>
             {% if not articles %}
             <div class="post-preview">
@@ -33,5 +34,13 @@
             </div>
             <hr>
             {% endfor %}
+            {% else %}
+            <div class="post-preview">
+                <h2 class="post-title">
+                    Please login to your account to view {{ owner }} articles
+                  </h2>
+            </div>   
+            {% endif %}
+
 
 {% endblock %}

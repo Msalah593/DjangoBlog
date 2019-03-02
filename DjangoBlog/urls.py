@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include,re_path
-from users.views import login_view,SignUp,confirmation_view,activate
+from users.views import SignUp,confirmation_view,activate
 from articles.views import ArticleList,ArticleCreate,articledetials,UserArticleList,ArticleUpdate
 from api.views import ArticleViewSet,UserViewSet
 from rest_framework import routers, serializers, viewsets

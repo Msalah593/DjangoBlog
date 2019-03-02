@@ -10,12 +10,9 @@ from django.contrib.auth.tokens import default_token_generator
 from .models import CustomUser
 # Create your views here.
 
-def login_view(request, *args, **kwargs):
-    return render(request,'index.html',{})
-
 def confirmation_view(request, *args, **kwargs):
     user=request.user
-    return render(request,'confirmation.html',{user : 'user'})
+    return render(request,'confirmation.html',{'user' : user, 'status': 'confirmation sent'})
 
 def activate(request,uidb64,token):
     username = urlsafe_base64_decode(uidb64[2:13]).decode('ascii')
@@ -24,9 +21,9 @@ def activate(request,uidb64,token):
     if token_is_valid and not user.is_active:
         user.is_active=True
         user.save()
-        return HttpResponse("User Activated !")
+        return render(request,'confirmation.html',{'user' : user, 'status' : 'user activated'})
     else:
-        return HttpResponse("invalid Token")
+        return render(request,'confirmation.html',{ 'status' : 'invalid token'})
 
 class SignUp(generic.CreateView):
     form_class = CustomUserCreationForm
