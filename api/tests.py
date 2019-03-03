@@ -4,7 +4,6 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from articles.models import Article
 from users.models import CustomUser
-# Create your tests here.
 
 class ArticleTests(APITestCase):
     fixtures=['dumb']

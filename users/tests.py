@@ -2,7 +2,6 @@ from django.shortcuts import render,reverse
 from django.test import TestCase
 from .models import CustomUser
 from django.core import mail
-# Create your tests here.
 
 class TestRegister(TestCase):
     fixtures=['dumb']

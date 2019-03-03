@@ -1,7 +1,6 @@
 from django.db import models
 from users.models import CustomUser
 from django.conf import settings
-# Create your models here.
 
 class Article (models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

@@ -8,7 +8,6 @@ from django.core.mail import send_mail
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator
 from .models import CustomUser
-# Create your views here.
 
 def confirmation_view(request, *args, **kwargs):
     user=request.user

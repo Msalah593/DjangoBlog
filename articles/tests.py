@@ -3,7 +3,6 @@ from django.urls import reverse
 from .models import Article
 from django.db.models import Q
 from users.models import CustomUser
-# Create your tests here.
 
 class TestArticleUpdateView(TestCase):
     fixtures=['dumb']

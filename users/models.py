@@ -7,6 +7,7 @@ from django.utils.encoding import force_bytes
 from django.core.mail import send_mail
 from django.conf import settings
 from django.db.models import signals
+
 class CustomUser(AbstractUser):
     email = models.EmailField(('email address'), blank=False,unique=True,
     error_messages={
@@ -22,7 +23,6 @@ def user_created_signal(sender,instance,created,**kwargs):
         if not instance.is_active:
             token = default_token_generator.make_token(instance)
             username_hash = urlsafe_base64_encode(force_bytes(instance.username))
-            # decoded=urlsafe_base64_decode(username_hash).decode("utf-8")
             subject='activate your acccount !'
             mail=instance.email
             url=('/').join(['http://localhost:8000/users/validate',str(username_hash),token])

@@ -3,7 +3,6 @@ from rest_framework.permissions import BasePermission
 
 class Usercreation(BasePermission):
     def has_object_permission(self, request, view, obj):
-        print("asdsa")
         if request.user and request.user.is_superuser:
             return True
         elif obj == request.user:

@@ -12,7 +12,6 @@ from .permissions import Usercreation,Articlecreation
 
 class ArticleViewSet(viewsets.ModelViewSet):
     permission_classes = [Articlecreation]
-    # authentication_classes = [authentication.BasicAuthentication]
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
     def perform_create(self, serializer):
@@ -25,9 +24,4 @@ class UserViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.validated_data['password'] = make_password(serializer.validated_data['password'])
         serializer.save()
-    # @action(detail=False, methods=['post'])
-    # def register(self, request):
-    #     permission_classes=(permissions.IsAuthenticated,)
-    #     from rest_framework.response import Response
-    #     return Response(request.data,status=200)
     

@@ -8,7 +8,6 @@ from django.db.models import Q
 from .forms import ArticleForm
 from users.models import CustomUser
 
-# Create your views here.
 
 class ArticleList(generic.ListView):
     ordering=['-pub_date']
@@ -90,7 +89,6 @@ def articledetials(request,id, *args , **kwargs):
     return render(request,'details.html',context)
 
 class UserArticleList(generic.ListView):
-    # queryset=Article.objects.filter(author=request.user)
     ordering=['-pub_date']
     model=Article
     template_name='userarticles.html'
@@ -98,7 +96,6 @@ class UserArticleList(generic.ListView):
      
     def get(self, request, user,*args, **kwargs):
         if request.user.is_authenticated:
-            # userid=CustomUser.objects.get(username=user)
             self.object_list = Article.objects.filter(author=request.user)
             allow_empty = self.get_allow_empty()
 
