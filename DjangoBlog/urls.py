@@ -21,14 +21,15 @@ from api.views import ArticleViewSet,UserViewSet
 from rest_framework import routers, serializers, viewsets
 
 router = routers.DefaultRouter()
+router.register(r'user', UserViewSet)
 router.register(r'article', ArticleViewSet)
-router.register(r'users', UserViewSet)
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/',include('django.contrib.auth.urls')),
-    re_path(r'^api/', include(router.urls)),
+    re_path(r'^api/', include(router.urls),name='api'),
     path('',ArticleList.as_view(), name='home'),
     path('createarticle',ArticleCreate.as_view(),name='createarticle'),
     path('articles/<id>/', articledetials, name='article-detail'),
