@@ -29,7 +29,7 @@ router.register(r'article', ArticleViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/',include('django.contrib.auth.urls')),
-    re_path(r'^api/', include(router.urls),name='api'),
+    re_path(r'^api/', include(router.urls)),
     path('',ArticleList.as_view(), name='home'),
     path('createarticle',ArticleCreate.as_view(),name='createarticle'),
     path('articles/<id>/', articledetials, name='article-detail'),

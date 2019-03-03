@@ -10,7 +10,7 @@ class Usercreation(BasePermission):
             return True
         return False
     def has_permission(self, request, view):
-        if request.method =='GET':
+        if request.method!='GET':
             if request.user.is_superuser:
                 return True
             else:
