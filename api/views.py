@@ -11,7 +11,7 @@ from users.models import CustomUser
 from .permissions import Usercreation,Articlecreation
 
 class ArticleViewSet(viewsets.ModelViewSet):
-    # permission_classes = [Articlecreation]
+    permission_classes = [Articlecreation]
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
     def perform_create(self, serializer):
