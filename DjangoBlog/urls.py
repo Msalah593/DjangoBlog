@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, re_path
 from articles.views import ArticleList
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -23,6 +25,5 @@ urlpatterns = [
     path('users/', include('users.urls')),
     re_path(r'^api/', include('api.urls')),
     path('articles/', include('articles.urls')),
-    path('', ArticleList.as_view(), name='home'),
-
-]
+    path('', ArticleList.as_view(), name='home')
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

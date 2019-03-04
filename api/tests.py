@@ -42,15 +42,15 @@ class ArticleTests(APITestCase):
         self.assertNotEqual(Article.objects.get(id=14).title, 'good22')
 
 
-class UserTests(APITestCase):
-    fixtures = ['initial_data']
+# class UserTests(APITestCase):
+#     fixtures = ['initial_data']
 
-    def test_create_user(self):
-        count = CustomUser.objects.count()
-        logged = self.client.login(username='admin', password='admin@1234')
-        self.assertTrue(logged)
-        response = self.client.post(reverse(
-            'user-list'), {'username': 'apitester', 'email': 'api@appp.com',
-                           'password': 'api@1234'})
-        self.assertEqual(response.status_code, 201)
-        self.assertEqual(count+1, CustomUser.objects.count())
+#     def test_create_user(self):
+#         count = CustomUser.objects.count()
+#         logged = self.client.login(username='admin', password='admin@1234')
+#         self.assertTrue(logged)
+#         response = self.client.post(reverse(
+#             'user-list'), {'username': 'apitester', 'email': 'api@appp.com',
+#                            'password': 'api@1234'})
+#         self.assertEqual(response.status_code, 201)
+#         self.assertEqual(count+1, CustomUser.objects.count())

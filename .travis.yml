@@ -9,6 +9,8 @@ env: # => 4
   - DJANGO=2.0.7 DB=mysql
 install:
   - pip install -r requirements.txt
+before_script: # => 6
+  - mysql -e 'create database test;' -u root  
 # command to run tests
 script:
   - python manage.py test

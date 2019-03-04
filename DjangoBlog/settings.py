@@ -30,6 +30,12 @@ ALLOWED_HOSTS = ['testserver', 'localhost']
 
 SECRET_KEY = '!1ru589j$@m#p5p#n7^d3%t7zefn78_!5h+=xwxb92(8a&-nv7'
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 # Application definition
 
@@ -119,6 +125,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '/media/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
