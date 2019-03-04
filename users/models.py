@@ -6,6 +6,10 @@ from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from django.core.mail import send_mail
 from django.db.models import signals
+from smtplib import SMTPException
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class CustomUser(AbstractUser):
@@ -34,4 +38,8 @@ def user_created_signal(sender, instance, created, **kwargs):
                            str(username_hash), token])
             msg = 'Hi ' + instance.username + \
                 'please follow the below link to activate your account\n' + url
-            send_mail(subject, msg, 'Blog@server.com', [mail])
+            try:
+                send_mail(subject, msg, 'Blog@server.com',
+                          [mail])
+            except SMTPException as e:
+                logger.exception('There was an error sending an email: ', e)
