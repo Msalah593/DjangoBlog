@@ -9,7 +9,7 @@ from .models import CustomUser
 
 def confirmation_view(request, *args, **kwargs):
     user = request.user
-    return render(request, 'confirmation.html',
+    return render(request, 'users/confirmation.html',
                   {'user': user, 'status': 'confirmation sent'})
 
 
@@ -20,14 +20,14 @@ def activate(request, uidb64, token):
     if token_is_valid and not user.is_active:
         user.is_active = True
         user.save()
-        return render(request, 'confirmation.html',
+        return render(request, 'users/confirmation.html',
                       {'user': user, 'status': 'user activated'})
     else:
-        return render(request, 'confirmation.html',
+        return render(request, 'users/confirmation.html',
                       {'status': 'invalid token'})
 
 
 class SignUp(generic.CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('confirmation')
-    template_name = 'signup.html'
+    template_name = 'users/signup.html'

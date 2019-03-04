@@ -55,7 +55,7 @@ class ArticleList(generic.ListView):
 @method_decorator(login_required, name='dispatch')
 class ArticleCreate(generic.CreateView):
     model = Article
-    template_name = 'create_article.html'
+    template_name = 'articles/create_article.html'
     fields = ['title', 'body']
     success_url = reverse_lazy('home')
 
@@ -69,7 +69,7 @@ class ArticleUpdate(generic.UpdateView):
     model = Article
     fields = ['title', 'body']
     form = ArticleForm
-    template_name = 'updatearticle.html'
+    template_name = 'articles/updatearticle.html'
     success_url = reverse_lazy('home')
 
     def get(self, request, pk, *args, **kwargs):
@@ -89,13 +89,13 @@ def articledetials(request, id, *args, **kwargs):
     if id:
         obj = get_object_or_404(Article, id=id)
         context = {'article': obj}
-    return render(request, 'details.html', context)
+    return render(request, 'articles/details.html', context)
 
 
 class UserArticleList(generic.ListView):
     ordering = ['-pub_date']
     model = Article
-    template_name = 'userarticles.html'
+    template_name = 'articles/userarticles.html'
     context_object_name = 'articles'
 
     def get(self, request, user, *args, **kwargs):
