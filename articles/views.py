@@ -6,6 +6,8 @@ from django.urls import reverse_lazy
 from django.utils import six
 from django.db.models import Q
 from .forms import ArticleForm
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 
 class ArticleList(generic.ListView):
@@ -50,6 +52,7 @@ class ArticleList(generic.ListView):
         return queryset
 
 
+@method_decorator(login_required, name='dispatch')
 class ArticleCreate(generic.CreateView):
     model = Article
     template_name = 'create_article.html'
@@ -61,6 +64,7 @@ class ArticleCreate(generic.CreateView):
         return super().form_valid(form)
 
 
+@method_decorator(login_required, name='dispatch')
 class ArticleUpdate(generic.UpdateView):
     model = Article
     fields = ['title', 'body']
@@ -84,7 +88,6 @@ def articledetials(request, id, *args, **kwargs):
     context = {}
     if id:
         obj = get_object_or_404(Article, id=id)
-        print(obj)
         context = {'article': obj}
     return render(request, 'details.html', context)
 
