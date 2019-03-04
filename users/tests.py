@@ -4,7 +4,7 @@ from .models import CustomUser
 from django.core import mail
 
 class TestRegister(TestCase):
-    fixtures=['dumb']
+    fixtures=['initial_data']
     def test_create_user(self):
         response=self.client.post(reverse('signup'),
                 {'username':'mohammed','email':'mohammed@gmm.com',

@@ -6,7 +6,7 @@ from articles.models import Article
 from users.models import CustomUser
 
 class ArticleTests(APITestCase):
-    fixtures=['dumb']
+    fixtures=['initial_data']
     def test_create_article(self):
         self.client.login(username='menbawy',password='men@1234')
         response=self.client.post(reverse('article-list'),{'title':'good','body':'ggood'})
@@ -36,7 +36,7 @@ class ArticleTests(APITestCase):
         self.assertNotEqual(Article.objects.get(id=14).title,'good22')
 
 class UserTests(APITestCase):
-    fixtures=['dumb']
+    fixtures=['initial_data']
     def test_create_user(self):
         count=CustomUser.objects.count()
         logged=self.client.login(username='admin',password='admin@1234')
