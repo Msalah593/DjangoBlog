@@ -9,7 +9,7 @@ from django.db.models import signals
 from smtplib import SMTPException
 import logging
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('send_email')
 
 
 class CustomUser(AbstractUser):
@@ -42,4 +42,4 @@ def user_created_signal(sender, instance, created, **kwargs):
                 send_mail(subject, msg, 'Blog@server.com',
                           [mail])
             except SMTPException as e:
-                logger.exception('There was an error sending an email: ', e)
+                logger.error('Error sending confirmation email: %s', e)

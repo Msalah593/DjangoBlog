@@ -26,6 +26,11 @@ DEBUG = False
 ALLOWED_HOSTS = ['testserver', 'localhost']
 
 
+# MUST BE CHANGED ON PRODUCTION
+
+SECRET_KEY = '!1ru589j$@m#p5p#n7^d3%t7zefn78_!5h+=xwxb92(8a&-nv7'
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -131,11 +136,48 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication'
+    ],
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+
     ]
 }
 
 FIXTURE_DIRS = [os.path.join(BASE_DIR, "fixtures")
                 ]
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'simple': {
+            'format':   '''{levelname} {asctime} 
+                {module} {process:d} {thread:d} {message}''',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': 'file.log',
+            'formatter': 'simple',
+        }
+    },
+    'loggers': {
+        'send_email': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': True,
+        }
+    }
+}
 
 
 try:
