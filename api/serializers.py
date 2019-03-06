@@ -19,7 +19,6 @@ class SignupSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}}
 
     def validate(self, data):
-        user = CustomUser(**data)
         # get the password from the data
         password = data.get('password')
 
@@ -28,7 +27,7 @@ class SignupSerializer(serializers.ModelSerializer):
             # validate the password and catch the exception
             validators.validate_password(password=password, user=CustomUser)
 
-        # the exception raised here is different than serializers.ValidationError
+        # the exception raised here different than serializers.ValidationError
         except exceptions.ValidationError as e:
             errors['password'] = list(e.messages)
 

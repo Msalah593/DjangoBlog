@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, Http404
 from django.views import generic
 from django.views.generic.edit import BaseUpdateView
 from .models import Article
@@ -8,6 +8,8 @@ from django.db.models import Q
 from .forms import ArticleForm
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.db.models.query import QuerySet
+from django.core.exceptions import ImproperlyConfigured
 
 
 class ArticleList(generic.ListView):
@@ -113,7 +115,8 @@ class UserArticleList(generic.ListView):
                 else:
                     is_empty = len(self.object_list) == 0
                 if is_empty:
-                    raise Http404(_("Empty list and '%(class_name)s.allow_empty' is False.")
+                    raise Http404(('''Empty list and 
+                        '%(class_name)s.allow_empty' is False.''')
                                   % {'class_name': self.__class__.__name__})
             context = self.get_context_data()
             print(context)

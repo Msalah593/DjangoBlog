@@ -45,7 +45,7 @@ class TestArticleCreateView(TestCase):
         response = self.client.post(reverse('createarticle'),
                                     {'title': 'good to see you',
                                      'body': 'thank you'})
-        self.assertEqual(Article.objects.count(), count+1)
+        self.assertEqual(Article.objects.count(), count + 1)
         self.assertEqual(response.status_code, 302)
 
     def test_create_not_logged_in(self):

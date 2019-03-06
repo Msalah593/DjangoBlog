@@ -13,8 +13,8 @@ def confirmation_view(request, *args, **kwargs):
                   {'user': user, 'status': 'confirmation sent'})
 
 
-def activate(request, uidb64, token):
-    username = urlsafe_base64_decode(uidb64[2:13]).decode('ascii')
+def activate(request, usernameb, token):
+    username = urlsafe_base64_decode(usernameb[2:13]).decode('ascii')
     user = get_object_or_404(CustomUser, username=username)
     token_is_valid = default_token_generator.check_token(user, token)
     if token_is_valid and not user.is_active:

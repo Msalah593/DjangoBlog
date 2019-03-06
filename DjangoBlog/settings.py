@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework.authtoken',
     'crispy_forms',
     'rest_framework',
     'users.apps.UsersConfig',
@@ -165,7 +166,7 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'simple': {
-            'format':   '''{levelname} {asctime} 
+            'format': '''{levelname} {asctime} 
                 {module} {process:d} {thread:d} {message}''',
             'style': '{',
         },
