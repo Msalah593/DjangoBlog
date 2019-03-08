@@ -5,6 +5,7 @@ urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('signup/', SignUp.as_view(), name='signup'),
     path('confirmation/', confirmation_view, name='confirmation'),
-    re_path(r'''validate/(?P<usernameb>[0-9A-Za-z_\-\']+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$''',
+    re_path(r'validate/(?P<usernameb>[0-9A-Za-z_\-\']+)/' +
+            r'(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
             activate, name='user-activation-link')
 ]

@@ -6,6 +6,7 @@ from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from django.core.mail import send_mail
 from django.db.models import signals
+from rest_framework.authtoken.models import Token
 from smtplib import SMTPException
 import logging
 
@@ -21,12 +22,13 @@ class CustomUser(AbstractUser):
                                     help_text=('''Designates whether this 
                                         user should be treated as
                                         active. Unselect this instead
-                                        of deleting accounts.'''))
+                                        of deleting accounts.''')) # noqa
 
 
 @receiver(signals.post_save, sender=CustomUser)
 def user_created_signal(sender, instance, created, **kwargs):
     if created:
+        Token.objects.create(user=instance)
         if not instance.is_active:
             token = default_token_generator.make_token(instance)
             username_hash = urlsafe_base64_encode(
