@@ -6,10 +6,12 @@ from django.core import exceptions
 
 
 class ArticleSerializer(serializers.ModelSerializer):
+    author_username = serializers.ReadOnlyField(source='author.username', read_only='True')
+
     class Meta:
         model = Article
-        fields = ('title', 'body', 'author', 'pub_date')
-        read_only_fields = ('author',)
+        fields = ('id', 'title', 'body', 'pub_date', 'author', 'author_username')
+        read_only_fields = ('author', 'author_username')
 
 
 class SignupSerializer(serializers.ModelSerializer):
