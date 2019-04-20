@@ -1,51 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-
-
 {% block content %}
-  <!-- Main Content -->
-  <div class="container" id='goto'>
-    <div class="row" >
-      <div class="col-lg-8 col-md-10 mx-auto" >
-          <form method='GET' action=''> 
-              <input class='col-lg-8' type='text' name='q' value= '{{ request.GET.q }}'  />
-              <input class='btn-primary btn-info' type='submit' value='search' onclick='gotothis()' >
-              </form>
-        {% if not articles %}
-        <div class="post-preview">
-            <h2 class="post-title">
-                No Posts found
-              </h2>
-        </div>     
-        {% endif %}
-        {% for article in articles %}
-        <div class="post-preview">
-          <a href="{% url 'article-detail' article.id %}">
-            <h2 class="post-title">
-              {{ article.title}}
-            </h2>
-            <h3 class="post-subtitle">
-              {{ article.body }}
-            </h3>
-          </a>
-          <p class="post-meta">Posted by
-            <a href="#">{{ article.author }}</a>
-            on {{ article.pub_date }}</p>
-        </div>
-        <hr>
-        {% endfor %}
-        <!-- Pager -->
-        <div class="clearfix" >
-          <a class="btn btn-primary float-right" href="#" id='gogo'>Older Posts &rarr;</a>
-        </div>
+  <div class="container" id='goto'  >
+    <div class="row"  style="height:100%">
+      <div class="col-lg-12 col-md-12" style="height:100%">
+      <iframe id="myIframe" frameborder="0" onload="setTimeout(changeH, 300)" onloadeddata="changeH()" style="overflow-x:hidden;overflow-y:scroll;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px" height="100%" width="100%" src="{% url 'articles-app' %}"></iframe>
       </div>
     </div>
   </div>
 
-  <hr>
+
+  <script>
+    function changeH(){
+    var iframe = document.getElementById("myIframe");
+    var goto =  document.getElementById("goto");
+        goto.style.height = iframe.contentWindow.document.body.clientHeight + 'px';
+    }
+    </script>
   
 {% endblock %}
-</html>
