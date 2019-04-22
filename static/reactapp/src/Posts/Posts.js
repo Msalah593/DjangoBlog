@@ -4,16 +4,14 @@ import 'whatwg-fetch'
 import Details from './Details.js'
 import Search from './Search.js'
 import Switch from '@material-ui/core/Switch';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Fab from "@material-ui/core/Fab";
-
+import Button from "@material-ui/core/Button";
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const styles = theme => ({
   layout: {
@@ -56,9 +54,9 @@ class Posts extends Component {
   }
 
   changeOrder(event) {
-    let order = event.currentTarget.value
+    console.log(event.target.name)
     this.setState({
-      ordering: order
+      [event.target.name]: event.target.value
     }, () => {
       this.loadPosts()
     })
@@ -149,55 +147,31 @@ class Posts extends Component {
             justify="center">
             <Grid
               container
-              justify="center"
-            >
+              justify="center" >
               <Grid item className='searchArea'>
-                <Search searchdata={this.filterposts} />
-              </Grid>
-              <Grid item className='filterButtons'>
-                <FormControl component="fieldset" className='filterButtons' >
-                  <RadioGroup
-                    name="ordering"
-                    value={this.state.ordering}
-                    onChange={this.changeOrder}
-                    row
-                    id="orderingvalue"
-                  >
-                    <FormControlLabel value="author" control={<Radio color="primary" />} label="author" labelPlacement="start" />
-                    <FormControlLabel value="title" control={<Radio color="primary" />} label="title" labelPlacement="start" />
-                    <FormControlLabel value="pub_date" control={<Radio color="primary" />} label="public date" labelPlacement="start" />
-                  </RadioGroup>
-                </FormControl>
+                <Search searchdata={this.filterposts} >
+                <Grid container className="sortBy">
+              <FormControl component="fieldset"  >
+          <Select
+            value={this.state.ordering}
+            onChange={this.changeOrder}
+            id="orderingvalue"
+            name="ordering"
+          >
+            <MenuItem value="author">author</MenuItem>
+            <MenuItem value="title">title</MenuItem>
+            <MenuItem value="pub_date">pub_date</MenuItem>
+          </Select>
+        </FormControl>
                 <div align='right'>Asc <Switch value="checkedC" onChange={this.invertOrder} /> Desc</div>
+              
+            </Grid>
+                </Search>
               </Grid>
-            </Grid>
-            <Grid
-              container justify="center" spacing={24}>
-               {previous ?
-                <Grid
-                  item
-                >
-
-                  <Fab onClick={() => this.fetchPosts(previous)}
-                    variant="extended" aria-label="Add" >
-                    &lt;&lt; Previous
-          </Fab>
-                </Grid>
-                : null}
-              {next ?
-                <Grid
-                  item
-                >
-                  <Fab onClick={() => this.fetchPosts(next)}
-                    variant="extended" aria-label="Add" >
-                    Next >>
-          </Fab>
-                </Grid>
-                : null}
-            </Grid>
+              </Grid>
             {posts.length > 0 ? posts.map((postItem, index) => {
               return (
-                <Details post={postItem} />
+                <Details key={index} post={postItem} />
               )
 
             }) :
@@ -208,6 +182,31 @@ class Posts extends Component {
                 />
               </div>
             }
+          
+          <Grid
+              container justify="center" spacing={24} className="pagination">
+               {previous ?
+                <Grid
+                  item
+                >
+
+                  <Button onClick={() => this.fetchPosts(previous)}
+                    variant="outlined" aria-label="Add" >
+                    &lt;&lt; Previous
+          </Button>
+                </Grid>
+                : null}
+              {next ?
+                <Grid
+                  item
+                >
+                  <Button onClick={() => this.fetchPosts(next)}
+                    variant="outlined" aria-label="Add" >
+                    Next >>
+          </Button>
+                </Grid>
+                : null}
+            </Grid>
 
           </Grid>
         </div>

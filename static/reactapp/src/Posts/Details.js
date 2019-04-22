@@ -63,7 +63,7 @@ class App extends Component {
      
       <React.Fragment>
             {
-              <Grid item key={postItem.title} xs={12} md={6}>
+              <Grid item key={postItem.title} xs={12} md={6} >
                 {/* <a   Style="text-decoration:none;"> */}
                 <Card 
                 onClick={()=> window.top.location.href = "http://localhost:8000/articles/" + postItem.id } 
@@ -76,7 +76,7 @@ class App extends Component {
                       <Typography variant="subtitle1" color="textSecondary">
                         {postItem.pub_date}
                       </Typography>
-                      <Typography variant="subtitle1" paragraph>
+                      <Typography className="textwrap" variant="subtitle1" paragraph>
                         {postItem.body}
                       </Typography>
                       <Typography variant="subtitle1" color="primary">

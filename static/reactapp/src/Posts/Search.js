@@ -61,36 +61,45 @@ class Search extends Component {
     return (
         <div >
         <form onSubmit={this.searchquery} > 
-        <Paper elevation={3}>
+        <Paper elevation={3} className="searchContainer" >
         <InputBase className='searchInput' placeholder="Search" id='search' />
         <IconButton className='searchButton' aria-label="Search" onClick={this.searchquery}>
         <SearchIcon />
         </IconButton>
         </Paper>
+        <div className="advanced-search">
+        <div className="column">
+        <small>Search By:</small>
         <FormGroup row>
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={this.state.titlechecked}
-              onChange={this.handleChange}
-              value="searchtitle"
-            />
-          }
-          label="Title"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={this.state.bodychecked}
-              onChange={this.handleChange}
-              value="searchbody"
-            />
-          }
-          label="body"
-        />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={this.state.titlechecked}
+                onChange={this.handleChange}
+                value="searchtitle"
+              />
+            }
+            label="Title"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={this.state.bodychecked}
+                onChange={this.handleChange}
+                value="searchbody"
+              />
+            }
+            label="body"
+          />
         </FormGroup>
+        </div>
+        <div className="column">
+        <small>Sort By:</small>
+        {this.props.children}
+        </div>
+        </div>
         </form>
-       
+        
         </div>
     );
   }

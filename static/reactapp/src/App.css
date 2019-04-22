@@ -1,13 +1,27 @@
+
+html,body{
+  overflow: hidden;
+  margin: 0;
+
+}
+.root{
+  overflow: hidden;
+}
+
+.textwrap{
+  text-overflow: ellipsis;
+  width: 15em;
+  white-space: nowrap;
+  overflow: hidden;
+}
 .searchContainer{
   display: flex;
   flex: 1;
-  margin: 10px 10px;
-  padding: 10px 10px;
 }
 .searchInput{
   flex: 1;
   margin: 10px 10px;
-  width: 85%
+  width: 87%
 }
 .searchButton{
   flex: 1;
@@ -19,10 +33,33 @@
 }
 .searchArea{
   padding-top: 30px;
-  flex-grow: 0.27
+  flex-grow: 0.1
 }
 .filterButtons{
 
   padding-top: 30px;
   margin-top: 30px
+}
+.searchFilter{
+
+  padding-top: 30px;
+  margin-top: 30px
+}
+
+.advanced-search{
+  margin: 5px;
+  display: flex;
+    flex: 1;
+}
+.advanced-search .column{
+  flex:.5;
+}
+.sortBy{
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.pagination{
+  margin: 10px;
+  padding: 30px;
 }
