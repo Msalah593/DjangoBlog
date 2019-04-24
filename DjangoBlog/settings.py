@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'crispy_forms',
     'rest_framework',
-    'oauth2_provider',
     'users.apps.UsersConfig',
     'articles',
     'api',

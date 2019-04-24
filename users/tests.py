@@ -1,6 +1,9 @@
 from django.shortcuts import reverse
 from django.test import TestCase
 from .models import CustomUser
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
 
 
 class TestRegister(TestCase):
@@ -17,13 +20,16 @@ class TestRegister(TestCase):
 
     def test_activate_user(self):
         user_before = CustomUser.objects.get(username='mohamed3')
-        user_before = user_before.is_active
+        user_before_active = user_before.is_active
+        self.assertFalse(user_before_active)
+        token = default_token_generator.make_token(user_before)
+        username_hash = urlsafe_base64_encode(
+            force_bytes(user_before.username))
         response = self.client.get(reverse('user-activation-link',
-                                           args=["b'bW9oYW1lZDM'",
-                                                 '54e-6eeff711e8db0fdef5b8']))
+                                           args=[username_hash,
+                                                 token]))
         user_after = CustomUser.objects.get(username='mohamed3')
         user_after = user_after.is_active
-        self.assertFalse(user_before)
         self.assertTrue(user_after)
         self.assertEqual(response.status_code, 200)
 
