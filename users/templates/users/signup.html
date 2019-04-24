@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block head %}
+<title>Sign Up</title>
+<style>
+    .center_div{
+        margin: 0 auto;
+        width:60% ;
+        height:100%;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="container center_div" id="signup">
+  <h2 class="text-center">Sign up</h2>
+  <div class=col-sm-14>
+  <form method="post">
+    
+    {{ form|crispy }}{% csrf_token %}
+    <button type="submit" class="btn btn-primary btn-xs">Sign up</button>
+  </form>
+</div>
+</div>
+
+<script>
+    var elmnt = document.getElementById("signup");
+    elmnt.scrollIntoView();
+    
+    </script>
+{% endblock %}
