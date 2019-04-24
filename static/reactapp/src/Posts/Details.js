@@ -9,6 +9,8 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Hidden from '@material-ui/core/Hidden';
 
+
+
 const styles = theme => ({
   layout: {
     width: 'auto',
@@ -36,11 +38,25 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.setPostStateOnProps = this.setPostStateOnProps.bind(this)
+    this.formateDate = this.formateDate.bind(this)
     this.state = {
       postItem: ''
     }
   }
   
+  formateDate(unformatteddate){
+    var months = [
+      "Jan.","Feb.","Mar.","April","May","June","July","Aug.","Sept.","Oct.","Nov.","Dec."
+    ]
+    var date = new Date(unformatteddate)
+    var formatteddate = months[date.getMonth()]
+    formatteddate += " " + date.getDay() + "," + date.getFullYear() + ","
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var time = (hours > 11 ? (hours - 11) : (hours + 1)) + ":" + minutes + (hours > 11 ? "pm." : "pm.");
+    return formatteddate + " " + time
+  }
+
   setPostStateOnProps() {
     const { post } = this.props
     this.setState({
@@ -74,7 +90,7 @@ class App extends Component {
                         {postItem.title}
                       </Typography>
                       <Typography variant="subtitle1" color="textSecondary">
-                        {postItem.pub_date}
+                        {this.formateDate(postItem.pub_date)}
                       </Typography>
                       <Typography className="textwrap" variant="subtitle1" paragraph>
                         {postItem.body}
