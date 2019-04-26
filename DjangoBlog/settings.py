@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['testserver', 'localhost']
+ALLOWED_HOSTS = ['testserver', 'localhost','glacial-island-52539.herokuapp.com']
 
 
 # MUST BE CHANGED ON PRODUCTION

@@ -1,0 +1,1 @@
+web: gunicorn DjangoBlog.wsgi:application --log-file - --log-level debug
