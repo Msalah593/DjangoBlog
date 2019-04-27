@@ -29,4 +29,4 @@ urlpatterns = [
     path('', ArticleList.as_view(), name='home'),
     path('articles-app', TemplateView.as_view(template_name='articles_app.html'),
          name='articles-app'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
