@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import django_heroku
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,14 +30,13 @@ ALLOWED_HOSTS = ['testserver', 'localhost', 'glacial-island-52539.herokuapp.com'
 
 # MUST BE CHANGED ON PRODUCTION
 
-SECRET_KEY = '!1ru589j$@m#p5p#n7^d3%t7zefn78_!5h+=xwxb92(8a&-nv7'
+SECRET_KEY = os.getenv(
+    "SECRET_KEY", "!1ru589j$@m#p5p#n7^d3%t7zefn78_!5h+=xwxb92(8a&-nv7")
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+DATABASE_URL = os.getenv('DATABASE_URL',None)
+
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 # Application definition
 
@@ -148,8 +148,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'blogblog762@gmail.com'
-EMAIL_HOST_PASSWORD = 'Blog@1234'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', None)
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', None)
 
 
 WAGTAIL_SITE_NAME = 'My Example Site'
