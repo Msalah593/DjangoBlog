@@ -33,7 +33,6 @@ ALLOWED_HOSTS = ['testserver', 'localhost', 'glacial-island-52539.herokuapp.com'
 SECRET_KEY = os.getenv(
     "SECRET_KEY", "!1ru589j$@m#p5p#n7^d3%t7zefn78_!5h+=xwxb92(8a&-nv7")
 
-DATABASE_URL = os.getenv('DATABASE_URL',None)
 
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600)
