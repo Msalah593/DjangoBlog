@@ -36,7 +36,7 @@
                 <a class="nav-link" href="{% url 'home' %}">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="https://www.linkedin.com/in/msalahawad">About</a>
+                <a class="nav-link" href="{% url 'about' %}">About</a>
               </li>
               {% if user.is_authenticated %}
               <li class="nav-item">
