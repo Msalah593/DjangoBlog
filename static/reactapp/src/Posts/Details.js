@@ -50,7 +50,7 @@ class App extends Component {
     ]
     var date = new Date(unformatteddate)
     var formatteddate = months[date.getMonth()]
-    formatteddate += " " + date.getDay() + "," + date.getFullYear() + ","
+    formatteddate += " " + date.getDate() + "," + date.getFullYear() + ","
     var hours = date.getHours();
     var minutes = date.getMinutes();
     var time = (hours > 11 ? (hours - 11) : (hours + 1)) + ":" + minutes + (hours > 11 ? "pm." : "pm.");
@@ -82,7 +82,7 @@ class App extends Component {
               <Grid item key={postItem.title} xs={12} md={6} >
                 {/* <a   Style="text-decoration:none;"> */}
                 <Card 
-                onClick={()=> window.top.location.href = "http://localhost:8000/articles/" + postItem.id } 
+                onClick={()=> window.top.location.href = "/articles/" + postItem.id } 
                 className={classes.card}>
                   <div className={classes.cardDetails}>
                     <CardContent>

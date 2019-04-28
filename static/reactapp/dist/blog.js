@@ -1504,7 +1504,7 @@ function (_Component) {
       var months = ["Jan.", "Feb.", "Mar.", "April", "May", "June", "July", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."];
       var date = new Date(unformatteddate);
       var formatteddate = months[date.getMonth()];
-      formatteddate += " " + date.getDay() + "," + date.getFullYear() + ",";
+      formatteddate += " " + date.getDate() + "," + date.getFullYear() + ",";
       var hours = date.getHours();
       var minutes = date.getMinutes();
       var time = (hours > 11 ? hours - 11 : hours + 1) + ":" + minutes + (hours > 11 ? "pm." : "pm.");
@@ -1542,7 +1542,7 @@ function (_Component) {
         md: 6
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_6___default.a, {
         onClick: function onClick() {
-          return window.top.location.href = "http://localhost:8000/articles/" + postItem.id;
+          return window.top.location.href = "/articles/" + postItem.id;
         },
         className: classes.card
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
