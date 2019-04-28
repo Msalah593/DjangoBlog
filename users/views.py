@@ -5,6 +5,7 @@ from .forms import CustomUserCreationForm
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator
 from .models import CustomUser
+import ast
 
 
 def confirmation_view(request, *args, **kwargs):
@@ -14,7 +15,8 @@ def confirmation_view(request, *args, **kwargs):
 
 
 def activate(request, usernameb, token):
-    username = urlsafe_base64_decode(usernameb[2:13]).decode('ascii')
+    usernameb = ast.literal_eval(usernameb)
+    username = urlsafe_base64_decode(usernameb).decode()
     user = get_object_or_404(CustomUser, username=username)
     token_is_valid = default_token_generator.check_token(user, token)
     if token_is_valid and not user.is_active:
