@@ -1748,12 +1748,12 @@ function (_Component) {
       var sortDsc = this.state.sortDsc;
       var searchtitle = this.state.searchtitle;
       var searchbody = this.state.searchbody;
-      var endpoint;
+      var endpoint = window.location.protocol + window.location.hostname;
 
       if (!sortDsc) {
-        endpoint = 'http://localhost:8000/api/article/?limit=20&ordering=' + '-' + this.state.ordering;
+        endpoint += '/api/article/?limit=20&ordering=' + '-' + this.state.ordering;
       } else {
-        endpoint = 'http://localhost:8000/api/article/?limit=20&ordering=' + this.state.ordering;
+        endpoint += '/api/article/?limit=20&ordering=' + this.state.ordering;
       }
 
       if (search !== null && search !== undefined) {
