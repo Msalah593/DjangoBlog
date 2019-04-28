@@ -9,7 +9,7 @@ from django.db.models import signals
 from rest_framework.authtoken.models import Token
 from smtplib import SMTPException
 import logging
-from django.contrib.sites.models import Site 
+from django.contrib.sites.models import Site
 
 logger = logging.getLogger('send_email')
 
