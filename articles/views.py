@@ -119,7 +119,6 @@ class UserArticleList(generic.ListView):
                                    '''"%(class_name)s.allow_empty" is False.''')
                                   % {'class_name': self.__class__.__name__})
             context = self.get_context_data()
-            print(context)
             return self.render_to_response(context)
         else:
             self.object_list = None
