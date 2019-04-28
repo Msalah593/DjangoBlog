@@ -1,0 +1,81 @@
+
+html,body{
+  overflow: hidden;
+  margin: 0 ;
+
+}
+.root{
+  overflow: hidden;
+}
+
+.textwrap{
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
+  width: 15em;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.searchContainer{
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex: 1 1;
+      flex: 1 1;
+}
+.searchInput{
+  -ms-flex: 1 1;
+      flex: 1 1;
+  margin: 10px 10px;
+  width: 87%
+}
+.searchButton{
+  -ms-flex: 1 1;
+      flex: 1 1;
+  margin: 10px 10px;
+  width: 1%
+}
+.containerGrid{
+  -ms-flex: 1, 1;
+      flex: 1, 1
+}
+.searchArea{
+  padding-top: 30px;
+  -ms-flex-positive: 0.1;
+      flex-grow: 0.1
+}
+.filterButtons{
+
+  padding-top: 30px;
+  margin-top: 30px
+}
+.searchFilter{
+
+  padding-top: 30px;
+  margin-top: 30px
+}
+
+.advanced-search{
+  margin: 5px;
+  display: -ms-flexbox;
+  display: flex;
+    -ms-flex: 1 1;
+        flex: 1 1;
+}
+.advanced-search .column{
+  -ms-flex:.5 1;
+      flex:.5 1;
+}
+.sortBy{
+  display: -ms-flexbox;
+  display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    -ms-flex-pack: center;
+        justify-content: center;
+}
+.pagination{
+
+  padding: 30px;
+  margin: 30px
+}
+
+/*# sourceMappingURL=blog.css.map*/
