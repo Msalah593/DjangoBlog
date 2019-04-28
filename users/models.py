@@ -9,7 +9,6 @@ from django.db.models import signals
 from rest_framework.authtoken.models import Token
 from smtplib import SMTPException
 import logging
-from django.contrib.sites.models import Site
 
 logger = logging.getLogger('send_email')
 
@@ -23,7 +22,7 @@ class CustomUser(AbstractUser):
                                     help_text=('''Designates whether this 
                                         user should be treated as
                                         active. Unselect this instead
-                                        of deleting accounts.'''))  # noqa
+                                        of deleting accounts.''')) # noqa
 
 
 @receiver(signals.post_save, sender=CustomUser)
@@ -36,11 +35,9 @@ def user_created_signal(sender, instance, created, **kwargs):
                 force_bytes(instance.username))
             subject = 'activate your acccount !'
             mail = instance.email
-            hostname = Site.objects.get_current().domain
             url = (
-                '/').join(['https:/', hostname, 'users/validate',
+                '/').join(['https://mosalah-blog.herokuapp.com/users/validate',
                            str(username_hash), token])
-            print(url)
             msg = 'Hi ' + instance.username + \
                 'please follow the below link to activate your account\n' + url
             try:
