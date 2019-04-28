@@ -1749,11 +1749,14 @@ function (_Component) {
       var searchtitle = this.state.searchtitle;
       var searchbody = this.state.searchbody;
       var endpoint = window.location.protocol + window.location.hostname;
+      console.log(endpoint);
 
       if (!sortDsc) {
-        endpoint += '/api/article/?limit=20&ordering=' + '-' + this.state.ordering;
+        console.log(endpoint);
+        endpoint = '/api/article/?limit=20&ordering=' + '-' + this.state.ordering;
       } else {
-        endpoint += '/api/article/?limit=20&ordering=' + this.state.ordering;
+        console.log(endpoint);
+        endpoint = '/api/article/?limit=20&ordering=' + this.state.ordering;
       }
 
       if (search !== null && search !== undefined) {

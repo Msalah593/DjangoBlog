@@ -88,9 +88,13 @@ class Posts extends Component {
     let { searchtitle } = this.state
     let { searchbody } = this.state
     let endpoint = window.location.protocol + window.location.hostname
-    if (!sortDsc) { endpoint += '/api/article/?limit=20&ordering=' + '-' + this.state.ordering }
+    console.log(endpoint)
+    if (!sortDsc) {
+      console.log(endpoint)
+      endpoint = '/api/article/?limit=20&ordering=' + '-' + this.state.ordering }
     else {
-      endpoint += '/api/article/?limit=20&ordering=' + this.state.ordering
+      console.log(endpoint)
+      endpoint = '/api/article/?limit=20&ordering=' + this.state.ordering
     }
     if (search !== null && search !== undefined) { endpoint += '&search=' + search }
     if (searchtitle === true && searchbody === false) {
