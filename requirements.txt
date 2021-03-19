@@ -16,7 +16,7 @@ django-simple-email-confirmation==0.23
 django-six==1.0.4
 django-taggit==0.23.0
 django-treebeard==4.3
-djangorestframework==3.9.2
+djangorestframework==3.11.2
 draftjs-exporter==2.1.5
 entrypoints==0.3
 ez-setup==0.9
